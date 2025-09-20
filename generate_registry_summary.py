@@ -66,6 +66,9 @@ def generate_html(services_info, output_file="registry_summary.html"):
     <head>
         <meta charset="UTF-8">
         <title>GA4GH Registry Summary</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
         <style>
             body { font-family: Arial, sans-serif; padding: 20px; }
             table { border-collapse: collapse; width: 100%; margin-bottom: 1em; }
@@ -107,7 +110,7 @@ def generate_html(services_info, output_file="registry_summary.html"):
                 <td><span class="json-toggle" onclick="toggleJsonRow('{{ svc.id }}')">Show JSON registration</span></td>
             </tr>
             <tr id="{{ svc.id }}" class="json-row">
-                <td colspan="7"><pre>{{ svc.raw_json }}</pre></td>
+                <td colspan="7"><pre><code class="language-json">{{ svc.raw_json }}</code></pre></td>
             </tr>
             {% endfor %}
         </table>
