@@ -15,12 +15,13 @@ def extract_service_info(services, artifact_filter=None):
     extracted = []
     for service in services:
         artifact = service.get("type", {}).get("artifact", "N/A")
+        version = service.get("type", {}).get("version", "N/A")
         if artifact_filter and artifact.lower() != artifact_filter.lower():
             continue
         info = {
             "name": service.get("name", "N/A"),
             "artifact": artifact,
-            "version": service.get("version", "N/A"),
+            "version": version,
             "org_name": service.get("organization", {}).get("name", "N/A"),
             "url": service.get("url", "#"),
         }
@@ -49,7 +50,7 @@ def generate_html(services_info, output_file="registry_summary.html"):
             <tr>
                 <th>Name</th>
                 <th>Artifact</th>
-                <th>Version</th>
+                <th>Artifact Version</th>
                 <th>Organization</th>
                 <th>URL</th>
             </tr>

@@ -23,3 +23,11 @@ pip install requests jinja2
 
 I generated the file `outputs/drs_summary.html` on 20250919.
 
+## Future Improvements
+
+I'd like to add the ability to pull information from service-info.  For example, the SBG service-info URL for it's DRS server is:
+
+    https://cgc-ga4gh-api.sbgenomics.com/ga4gh/drs/v1/service-info 
+
+I'd like the script to be able to parse that and pull the standard version info from this
+and then report if what's in the registry is different from the live server.
