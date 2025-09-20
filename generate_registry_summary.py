@@ -1,6 +1,7 @@
 import requests
 from jinja2 import Template
 import argparse
+import json
 
 REGISTRY_URL = "https://registry.ga4gh.org/v1/services"
 
@@ -31,7 +32,7 @@ def fetch_live_service_info(base_url, artifact):
 def extract_service_info(services, artifact_filter=None):
     """Extract relevant fields and filter by artifact if specified."""
     extracted = []
-    for service in services:
+    for idx, service in enumerate(services):
         artifact = service.get("type", {}).get("artifact", "N/A")
         version = service.get("type", {}).get("version", "N/A")
 
@@ -44,6 +45,7 @@ def extract_service_info(services, artifact_filter=None):
         version_mismatch = live_version and (live_version != version)
 
         info = {
+            "id": f"svc-{idx}",
             "name": service.get("name", "N/A"),
             "artifact": artifact,
             "version": version,
@@ -51,6 +53,7 @@ def extract_service_info(services, artifact_filter=None):
             "url": service_info_url or base_url,
             "live_version": live_version or "N/A",
             "version_mismatch": version_mismatch,
+            "raw_json": json.dumps(service, indent=2)
         }
         extracted.append(info)
     return extracted
@@ -65,16 +68,24 @@ def generate_html(services_info, output_file="registry_summary.html"):
         <title>GA4GH Registry Summary</title>
         <style>
             body { font-family: Arial, sans-serif; padding: 20px; }
-            table { border-collapse: collapse; width: 100%; }
-            th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+            table { border-collapse: collapse; width: 100%; margin-bottom: 1em; }
+            th, td { border: 1px solid #ccc; padding: 8px; text-align: left; vertical-align: top; }
             th { background-color: #f2f2f2; }
             tr:hover { background-color: #f9f9f9; }
             .mismatch { background-color: #ffe6e6; }
+            .json-row { display: none; }
+            .json-toggle { cursor: pointer; color: blue; text-decoration: underline; }
+            pre { background: #f4f4f4; padding: 10px; overflow-x: auto; max-height: 400px; }
         </style>
+        <script>
+            function toggleJsonRow(id) {
+                const row = document.getElementById(id);
+                row.style.display = row.style.display === 'table-row' ? 'none' : 'table-row';
+            }
+        </script>
     </head>
     <body>
         <h1>GA4GH Registry Summary</h1>
-        <p>Red lines indicate version mismatches between registry and live service-info.</p>
         <table>
             <tr>
                 <th>Name</th>
@@ -83,6 +94,7 @@ def generate_html(services_info, output_file="registry_summary.html"):
                 <th>Live Version</th>
                 <th>Organization</th>
                 <th>Service-info URL</th>
+                <th>More</th>
             </tr>
             {% for svc in services %}
             <tr class="{% if svc.version_mismatch %}mismatch{% endif %}">
@@ -92,6 +104,10 @@ def generate_html(services_info, output_file="registry_summary.html"):
                 <td>{{ svc.live_version }}</td>
                 <td>{{ svc.org_name }}</td>
                 <td><a href="{{ svc.url }}" target="_blank">{{ svc.url }}</a></td>
+                <td><span class="json-toggle" onclick="toggleJsonRow('{{ svc.id }}')">Show JSON registration</span></td>
+            </tr>
+            <tr id="{{ svc.id }}" class="json-row">
+                <td colspan="7"><pre>{{ svc.raw_json }}</pre></td>
             </tr>
             {% endfor %}
         </table>

@@ -6,16 +6,24 @@
         <title>GA4GH Registry Summary</title>
         <style>
             body { font-family: Arial, sans-serif; padding: 20px; }
-            table { border-collapse: collapse; width: 100%; }
-            th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+            table { border-collapse: collapse; width: 100%; margin-bottom: 1em; }
+            th, td { border: 1px solid #ccc; padding: 8px; text-align: left; vertical-align: top; }
             th { background-color: #f2f2f2; }
             tr:hover { background-color: #f9f9f9; }
             .mismatch { background-color: #ffe6e6; }
+            .json-row { display: none; }
+            .json-toggle { cursor: pointer; color: blue; text-decoration: underline; }
+            pre { background: #f4f4f4; padding: 10px; overflow-x: auto; max-height: 400px; }
         </style>
+        <script>
+            function toggleJsonRow(id) {
+                const row = document.getElementById(id);
+                row.style.display = row.style.display === 'table-row' ? 'none' : 'table-row';
+            }
+        </script>
     </head>
     <body>
         <h1>GA4GH Registry Summary</h1>
-        <p>Red lines indicate version mismatches between registry and live service-info.</p>
         <table>
             <tr>
                 <th>Name</th>
@@ -24,6 +32,7 @@
                 <th>Live Version</th>
                 <th>Organization</th>
                 <th>Service-info URL</th>
+                <th>More</th>
             </tr>
             
             <tr class="mismatch">
@@ -33,6 +42,32 @@
                 <td>1.3.0</td>
                 <td>Seven Bridges</td>
                 <td><a href="https://cavatica-ga4gh-api.sbgenomics.com/ga4gh/drs/v1/service-info" target="_blank">https://cavatica-ga4gh-api.sbgenomics.com/ga4gh/drs/v1/service-info</a></td>
+                <td><span class="json-toggle" onclick="toggleJsonRow('svc-4')">Show JSON registration</span></td>
+            </tr>
+            <tr id="svc-4" class="json-row">
+                <td colspan="7"><pre>{
+  "id": "com.sb.cavatica.drs",
+  "name": "Cavatica DRS API",
+  "type": {
+    "group": "org.ga4gh",
+    "artifact": "drs",
+    "version": "1.0.0"
+  },
+  "organization": {
+    "id": "com.sb",
+    "name": "Seven Bridges",
+    "url": "https://www.sevenbridges.com"
+  },
+  "version": "1.0.0",
+  "url": "https://cavatica-ga4gh-api.sbgenomics.com",
+  "description": "The Data Repository Service (DRS) API provides a generic interface to data repositories so data consumers, including workflow systems, can access data in a single, standard way regardless of where it's stored and how it's managed. The primary functionality of DRS is to map a logical ID to a means for physically retrieving the data represented by the ID.",
+  "contactUrl": "mailto:support@sevenbridges.com",
+  "documentationUrl": "https://docs.cavatica.org/docs/drs-api-overview",
+  "createdAt": "2020-09-10T00:41:57Z",
+  "updatedAt": "2020-09-10T00:41:57Z",
+  "environment": "production",
+  "curiePrefix": "sbcav"
+}</pre></td>
             </tr>
             
             <tr class="mismatch">
@@ -42,6 +77,32 @@
                 <td>1.3.0</td>
                 <td>Seven Bridges</td>
                 <td><a href="https://cgc-ga4gh-api.sbgenomics.com/ga4gh/drs/v1/service-info" target="_blank">https://cgc-ga4gh-api.sbgenomics.com/ga4gh/drs/v1/service-info</a></td>
+                <td><span class="json-toggle" onclick="toggleJsonRow('svc-5')">Show JSON registration</span></td>
+            </tr>
+            <tr id="svc-5" class="json-row">
+                <td colspan="7"><pre>{
+  "id": "com.sb.cgc.drs",
+  "name": "Cancer Genomics Cloud DRS API",
+  "type": {
+    "group": "org.ga4gh",
+    "artifact": "drs",
+    "version": "1.0.0"
+  },
+  "organization": {
+    "id": "com.sb",
+    "name": "Seven Bridges",
+    "url": "https://www.sevenbridges.com"
+  },
+  "version": "1.0.0",
+  "url": "https://cgc-ga4gh-api.sbgenomics.com",
+  "description": "The Data Repository Service (DRS) API provides a generic interface to data repositories so data consumers, including workflow systems, can access data in a single, standard way regardless of where it's stored and how it's managed. The primary functionality of DRS is to map a logical ID to a means for physically retrieving the data represented by the ID.",
+  "contactUrl": "mailto:support@sevenbridges.com",
+  "documentationUrl": "https://docs.cancergenomicscloud.org/docs/drs-api-overview",
+  "createdAt": "2020-09-10T00:41:57Z",
+  "updatedAt": "2020-09-10T00:41:57Z",
+  "environment": "production",
+  "curiePrefix": "sbcgc"
+}</pre></td>
             </tr>
             
             <tr class="mismatch">
@@ -51,6 +112,32 @@
                 <td>1.0.3</td>
                 <td>Childrens Hospital of Philadelphia</td>
                 <td><a href="https://data.kidsfirstdrc.org/ga4gh/drs/v1/service-info" target="_blank">https://data.kidsfirstdrc.org/ga4gh/drs/v1/service-info</a></td>
+                <td><span class="json-toggle" onclick="toggleJsonRow('svc-9')">Show JSON registration</span></td>
+            </tr>
+            <tr id="svc-9" class="json-row">
+                <td colspan="7"><pre>{
+  "id": "edu.chop.kfdrc",
+  "name": "The Kids First Data Resource Center (KFDRC)",
+  "type": {
+    "group": "org.ga4gh",
+    "artifact": "drs",
+    "version": "1.1.0"
+  },
+  "organization": {
+    "id": "edu.chop",
+    "name": "Childrens Hospital of Philadelphia",
+    "shortName": "CHOP",
+    "url": "https://kidsfirstdrc.org"
+  },
+  "version": "2020.08",
+  "url": "https://data.kidsfirstdrc.org",
+  "description": "Full implementation of the DRS 1.1 standard with support for persistent identifiers. Open source DRS server that follows the Gen3 implementation. Gen3 is a GA4GH compliant open source platform for developing framework services and data commons. Data commons accelerate and democratize the process of scientific discovery, especially over large or complex datasets. Gen3 is maintained by the Center for Translational Data Science at the University of Chicago. https://gen3.org",
+  "contactUrl": "mailto:heathap@email.chop.edu",
+  "documentationUrl": "https://petstore.swagger.io/?url=https://raw.githubusercontent.com/uc-cdis/Indexd/master/openapis/swagger.yaml#/DRS",
+  "createdAt": "2020-10-06T13:11:38Z",
+  "updatedAt": "2020-10-06T13:11:38Z",
+  "environment": "production"
+}</pre></td>
             </tr>
             
             <tr class="">
@@ -60,6 +147,33 @@
                 <td>1.2.0</td>
                 <td>National Center for Biotechnology Information</td>
                 <td><a href="https://locate.be-md.ncbi.nlm.nih.gov/ga4gh/drs/v1/service-info" target="_blank">https://locate.be-md.ncbi.nlm.nih.gov/ga4gh/drs/v1/service-info</a></td>
+                <td><span class="json-toggle" onclick="toggleJsonRow('svc-12')">Show JSON registration</span></td>
+            </tr>
+            <tr id="svc-12" class="json-row">
+                <td colspan="7"><pre>{
+  "id": "gov.nih.ncbi.drs",
+  "name": "National Center for Biotechnology Information DRS API",
+  "type": {
+    "group": "org.ga4gh",
+    "artifact": "drs",
+    "version": "1.2.0"
+  },
+  "organization": {
+    "id": "com.nih.ncbi",
+    "name": "National Center for Biotechnology Information",
+    "shortName": "NCBI",
+    "url": "https://www.ncbi.nlm.nih.gov/"
+  },
+  "version": "1.0.0",
+  "url": "https://locate.be-md.ncbi.nlm.nih.gov",
+  "description": "The Data Repository Service (DRS) API provides a generic interface to data repositories so data consumers, including workflow systems, can access data in a single, standard way regardless of where it's stored and how it's managed. The primary functionality of DRS is to map a logical ID to a means for physically retrieving the data represented by the ID.",
+  "contactUrl": "mailto:dbgap-help@ncbi.nlm.nih.gov",
+  "documentationUrl": "https://locate.be-md.ncbi.nlm.nih.gov/ga4gh/drs/v1/#/DataRepositoryService",
+  "createdAt": "2020-09-10T00:00:00Z",
+  "updatedAt": "2023-04-19T00:00:00Z",
+  "environment": "production",
+  "curiePrefix": "ncbi"
+}</pre></td>
             </tr>
             
             <tr class="mismatch">
@@ -69,6 +183,32 @@
                 <td>1.0.3</td>
                 <td>NCI Data Commons Framework Services</td>
                 <td><a href="https://nci-crdc.datacommons.io/ga4gh/drs/v1/service-info" target="_blank">https://nci-crdc.datacommons.io/ga4gh/drs/v1/service-info</a></td>
+                <td><span class="json-toggle" onclick="toggleJsonRow('svc-13')">Show JSON registration</span></td>
+            </tr>
+            <tr id="svc-13" class="json-row">
+                <td colspan="7"><pre>{
+  "id": "gov.nih.nci.dcfs.drs",
+  "name": "NCI DCFS",
+  "type": {
+    "group": "org.ga4gh",
+    "artifact": "drs",
+    "version": "1.1.0"
+  },
+  "organization": {
+    "id": "gov.nih.nci.dcfs",
+    "name": "NCI Data Commons Framework Services",
+    "shortName": "NCI DCFS",
+    "url": "https://nci-crdc.datacommons.io/"
+  },
+  "version": "2.12.0",
+  "url": "https://nci-crdc.datacommons.io/",
+  "description": "DRS server that follows the Gen3 implementation. Gen3 is a GA4GH compliant open source platform for developing framework services and data commons. Data commons accelerate and democratize the process of scientific discovery, especially over large or complex datasets. Gen3 is maintained by the Center for Translational Data Science at the University of Chicago. https://gen3.org",
+  "contactUrl": "mailto:mlukowski@uchicago.edu",
+  "documentationUrl": "http://petstore.swagger.io/?url=https://raw.githubusercontent.com/uc-cdis/Indexd/master/openapis/swagger.yaml#/DRS",
+  "createdAt": "2020-07-24T12:00:00Z",
+  "updatedAt": "2020-07-24T12:00:00Z",
+  "curiePrefix": "dg.4DFC"
+}</pre></td>
             </tr>
             
             <tr class="mismatch">
@@ -78,6 +218,31 @@
                 <td>1.0.3</td>
                 <td>BioData Catalyst</td>
                 <td><a href="https://gen3.biodatacatalyst.nhlbi.nih.gov/ga4gh/drs/v1/service-info" target="_blank">https://gen3.biodatacatalyst.nhlbi.nih.gov/ga4gh/drs/v1/service-info</a></td>
+                <td><span class="json-toggle" onclick="toggleJsonRow('svc-14')">Show JSON registration</span></td>
+            </tr>
+            <tr id="svc-14" class="json-row">
+                <td colspan="7"><pre>{
+  "id": "gov.nih.nhlbi.biodatacatalyst.drs",
+  "name": "BioData Catalyst",
+  "type": {
+    "group": "org.ga4gh",
+    "artifact": "drs",
+    "version": "1.1.0"
+  },
+  "organization": {
+    "id": "gov.nih.nhlbi.biodatacatalyst",
+    "name": "BioData Catalyst",
+    "url": "https://gen3.biodatacatalyst.nhlbi.nih.gov/"
+  },
+  "version": "2.12.0",
+  "url": "https://gen3.biodatacatalyst.nhlbi.nih.gov/",
+  "description": "Full implementation of the DRS 1.1 standard with support for persistent identifiers. Open source DRS server that follows the Gen3 implementation. Gen3 is a GA4GH compliant open source platform for developing framework services and data commons. Data commons accelerate and democratize the process of scientific discovery, especially over large or complex datasets. Gen3 is maintained by the Center for Translational Data Science at the University of Chicago. https://gen3.org",
+  "contactUrl": "mailto:aculotti@uchicago.edu",
+  "documentationUrl": "http://petstore.swagger.io/?url=https://raw.githubusercontent.com/uc-cdis/Indexd/master/openapis/swagger.yaml#/DRS",
+  "createdAt": "2020-07-24T12:00:00Z",
+  "updatedAt": "2020-07-24T12:00:00Z",
+  "curiePrefix": "dg.4503"
+}</pre></td>
             </tr>
             
             <tr class="">
@@ -87,6 +252,31 @@
                 <td>N/A</td>
                 <td>AnVIL</td>
                 <td><a href="https://gen3.theanvil.io/ga4gh/drs/v1/service-info" target="_blank">https://gen3.theanvil.io/ga4gh/drs/v1/service-info</a></td>
+                <td><span class="json-toggle" onclick="toggleJsonRow('svc-16')">Show JSON registration</span></td>
+            </tr>
+            <tr id="svc-16" class="json-row">
+                <td colspan="7"><pre>{
+  "id": "io.theanvil.drs",
+  "name": "AnVIL",
+  "type": {
+    "group": "org.ga4gh",
+    "artifact": "drs",
+    "version": "1.1.0"
+  },
+  "organization": {
+    "id": "io.theanvil",
+    "name": "AnVIL",
+    "url": "https://gen3.theanvil.io/"
+  },
+  "version": "2.12.0",
+  "url": "https://gen3.theanvil.io/",
+  "description": "DRS server that follows the Gen3 implementation. Gen3 is a GA4GH compliant open source platform for developing framework services and data commons. Data commons accelerate and democratize the process of scientific discovery, especially over large or complex datasets. Gen3 is maintained by the Center for Translational Data Science at the University of Chicago. https://gen3.org",
+  "contactUrl": "mailto:aculotti@uchicago.edu",
+  "documentationUrl": "http://petstore.swagger.io/?url=https://raw.githubusercontent.com/uc-cdis/Indexd/master/openapis/swagger.yaml#/DRS",
+  "createdAt": "2020-07-24T12:00:00Z",
+  "updatedAt": "2020-07-24T12:00:00Z",
+  "curiePrefix": "dg.ANV0"
+}</pre></td>
             </tr>
             
         </table>
