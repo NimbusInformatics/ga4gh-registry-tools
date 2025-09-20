@@ -17,4 +17,9 @@ pip install requests jinja2
     python generate_registry_summary.py --artifact drs
 
 ### Output to custom filename
-    python generate_registry_summary.py --artifact tes --output tes_summary.html
+    python generate_registry_summary.py --artifact drs --output drs_summary.html
+
+## Sample Output
+
+I generated the file `outputs/drs_summary.html` on 20250919.
+
