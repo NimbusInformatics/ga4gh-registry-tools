@@ -19,14 +19,14 @@ def fetch_live_service_info(base_url, artifact):
     """Fetch live service-info JSON from the given base URL based on artifact."""
     path = SERVICE_INFO_PATHS.get(artifact.lower())
     if not path:
-        return None
+        return None, None
     service_info_url = base_url.rstrip("/") + path
     try:
         response = requests.get(service_info_url, timeout=5)
         response.raise_for_status()
-        return response.json()
+        return response.json(), service_info_url
     except Exception as e:
-        return {"error": str(e)}
+        return {"error": str(e)}, service_info_url
 
 def extract_service_info(services, artifact_filter=None):
     """Extract relevant fields and filter by artifact if specified."""
@@ -38,7 +38,8 @@ def extract_service_info(services, artifact_filter=None):
         if artifact_filter and artifact.lower() != artifact_filter.lower():
             continue
 
-        live_info = fetch_live_service_info(service.get("url", ""), artifact)
+        base_url = service.get("url", "")
+        live_info, service_info_url = fetch_live_service_info(base_url, artifact)
         live_version = live_info.get("type", {}).get("version") if isinstance(live_info, dict) else None
         version_mismatch = live_version and (live_version != version)
 
@@ -47,7 +48,7 @@ def extract_service_info(services, artifact_filter=None):
             "artifact": artifact,
             "version": version,
             "org_name": service.get("organization", {}).get("name", "N/A"),
-            "url": service.get("url", "#"),
+            "url": service_info_url or base_url,
             "live_version": live_version or "N/A",
             "version_mismatch": version_mismatch,
         }
@@ -73,6 +74,7 @@ def generate_html(services_info, output_file="registry_summary.html"):
     </head>
     <body>
         <h1>GA4GH Registry Summary</h1>
+        <p>Red lines indicate version mismatches between registry and live service-info.</p>
         <table>
             <tr>
                 <th>Name</th>
@@ -80,7 +82,7 @@ def generate_html(services_info, output_file="registry_summary.html"):
                 <th>Registry Version</th>
                 <th>Live Version</th>
                 <th>Organization</th>
-                <th>URL</th>
+                <th>Service-info URL</th>
             </tr>
             {% for svc in services %}
             <tr class="{% if svc.version_mismatch %}mismatch{% endif %}">
