@@ -7,6 +7,7 @@ A repo for registry tools.  Specifically, to generate a report in HTML from the 
 ```bash
 conda create -n ga4gh-registry python=3.11 -y
 conda activate ga4gh-registry
+conda install -c conda-forge cartopy pandas matplotlib -y
 pip install requests jinja2
 ```
 ## Running Tool & Making Registry Reports
