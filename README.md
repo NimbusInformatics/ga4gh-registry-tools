@@ -44,3 +44,9 @@ This generates an interactive window and also .png and .svg output files.
 ```bash
 python plot_drs_map.py
 ```
+
+### Sample Map Output
+
+The DRS map as of 20251006:
+
+![The DRS map as of 20251006](/drs_world_map_cartopy.svg)
