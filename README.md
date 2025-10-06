@@ -27,7 +27,7 @@ I generated the file `outputs/drs_summary.html` on 20250919.
 
 ## Generating a DRS Map
 
-Note, I created a snapshot of registration information in the `drs_servers.tsv` file.
+Note, I created a snapshot of registration information in the `drs_servers.tsv` file on 20251006.
 
 In the future, this information needs to come from the GA4GH registry.  This will 
 happen once the geolocation and other fields are added to the official GA4GH registry.
@@ -39,3 +39,8 @@ from a Google form but in the future this should be the registry.
 
 ### Generating the Map
 
+This generates an interactive window and also .png and .svg output files.
+
+```bash
+python plot_drs_map.py
+```
