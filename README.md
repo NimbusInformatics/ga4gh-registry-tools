@@ -1,6 +1,6 @@
 # ga4gh-registry-tools
 
-A repo for registry tools.  Specifically, to generate a report in HTML from the public GA4GH registry.
+A repo for registry tools.  Specifically, to generate a report in HTML from the public GA4GH registry and to plot a map of the registered DRS servers.
 
 ## Install
 
@@ -24,4 +24,18 @@ pip install requests jinja2
 ## Sample Output
 
 I generated the file `outputs/drs_summary.html` on 20250919.
+
+## Generating a DRS Map
+
+Note, I created a snapshot of registration information in the `drs_servers.tsv` file.
+
+In the future, this information needs to come from the GA4GH registry.  This will 
+happen once the geolocation and other fields are added to the official GA4GH registry.
+
+### Inputs
+
+I put a simple inputs file in `drs_servers.tsv`, this was created by harvesting information
+from a Google form but in the future this should be the registry.
+
+### Generating the Map
 
