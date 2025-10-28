@@ -1,0 +1,36 @@
+array_name: null
+required_fields:
+- ID
+- Name
+- URL
+mapping:
+  id: ID
+  name: Name
+  description: Description
+  url: URL
+  version: Version
+  environment: Environment
+  contactUrl: Contact URL
+  documentationUrl: Documentation URL
+  type.group:
+    const: org.ga4gh
+  type.artifact:
+    const: drs
+  type.version: DRS Version
+  organization.id: Organization ID
+  organization.name: Organization Name
+  organization.url: Organization URL
+passthrough_columns:
+- Timestamp
+- Email Address
+- Curie Prefix
+- 'Geolocation (latitude, longitude) '
+- Geolocation (city code)
+- Geolocation (country)
+- Service Info URL
+- Do you consent to having service info queried periodically?
+- How many unique DRS objects are present in your DRS server?
+- What is the total non-duplicated storage footprint for your DRS server (in GB)
+- Key publications that use your DRS server (if available)
+- Is your DRS server on a commercial cloud, private cloud, or on premises/dedicated
+  local hardware?
